@@ -1,7 +1,7 @@
 const Mock = require('mockjs')
 
 const loginData = Mock.mock({
-    'data|2': {
+    'data': {
         user: {
             roles: [
                 'admin'

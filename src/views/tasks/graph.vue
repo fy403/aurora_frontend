@@ -1,14 +1,17 @@
 <template>
-    <span>图任务</span>
+    <div class="app-container">
+        <side-preview></side-preview>
+        <graph-editor></graph-editor>
+    </div>
 </template>
 
 <script>
-export default ({
-    data() {
-        return {
-            
-        }
+import SidePreview from '@/components/SidePreview'
+import GraphEditor from '@/components/GraphEditor'
+export default({
+    components: {
+        SidePreview,
+        GraphEditor,
     }
 })
 </script>
-

@@ -4,7 +4,6 @@ import Mock from 'mockjs'
 import loginApi from './Modules/login'
 import userInfoApi from './Modules/userInfo'
 
-
 // Mock函数
 const { mock } = Mock
 
