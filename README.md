@@ -1,4 +1,4 @@
-# vue2-study
+# aurora_frontend
 
 ## Project setup
 ```
