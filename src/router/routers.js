@@ -3,7 +3,11 @@ import Router from 'vue-router'
 import Layout from '../layout/index'
 
 Vue.use(Router)
-
+//以下代码解决路由地址重复的报错问题(一劳永逸)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 export const constantRouterMap = [
   { path: '/login',
     meta: { title: '登录', noCache: true },

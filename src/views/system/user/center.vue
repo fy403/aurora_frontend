@@ -21,7 +21,7 @@
             <ul class="user-info">
               <li><div style="height: 100%"><svg-icon icon-class="login" /> 登录账号<div class="user-right">{{ user.username }}</div></div></li>
               <li><svg-icon icon-class="user1" /> 用户昵称 <div class="user-right">{{ user.nickName }}</div></li>
-              <li><svg-icon icon-class="dept" /> 所属部门 <div class="user-right"> {{ user.dept.name }}</div></li>
+              <!-- <li><svg-icon icon-class="dept" /> 所属部门 <div class="user-right"> {{ user.dept.name }}</div></li> -->
               <!-- <li><svg-icon icon-class="phone" /> 手机号码 <div class="user-right">{{ user.phone }}</div></li> -->
               <!-- <li><svg-icon icon-class="email" /> 用户邮箱 <div class="user-right">{{ user.email }}</div></li> -->
             </ul>
@@ -42,12 +42,12 @@
                   <el-input v-model="form.phone" style="width: 35%;" />
                   <span style="color: #C0C0C0;margin-left: 10px;">手机号码不能重复</span>
                 </el-form-item> -->
-                <el-form-item label="性别">
+                <!-- <el-form-item label="性别">
                   <el-radio-group v-model="form.gender" style="width: 178px">
                     <el-radio label="男">男</el-radio>
                     <el-radio label="女">女</el-radio>
                   </el-radio-group>
-                </el-form-item>
+                </el-form-item> -->
                 <!-- <el-form-item label="">
                   <el-button :loading="saveLoading" size="mini" type="primary" @click="doSubmit">保存配置</el-button>
                 </el-form-item> -->

@@ -141,6 +141,10 @@ export default {
           type: 'warning',
           duration: 5000
         })
+        this.loginForm.username = ""
+        this.loginForm.password = ""
+        Cookies.remove('password')
+        Cookies.remove('username')
         Cookies.remove('point')
       }
     }

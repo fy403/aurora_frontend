@@ -11,12 +11,14 @@ import permission from './components/Permission'
 import 'normalize.css/normalize.css'
 import './assets/styles/element-variables.scss'
 import './assets/styles/index.scss'
+import 'element-ui/lib/theme-chalk/index.css'
+import './assets/styles/panel.css'
 
 // global icons
 import './assets/icons'
 
 // 引入mock文件，正式发布时，注释掉该处即可
-import '@/mock'
+// import '@/mock'
 
 import App from './App'
 import store from './store'
@@ -38,3 +40,5 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+

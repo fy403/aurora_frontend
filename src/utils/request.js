@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/', // api 的 base_url
+  baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
   timeout: Config.timeout // 请求超时时间
 })
 
@@ -28,6 +28,7 @@ service.interceptors.request.use(
 
 // response 拦截器
 service.interceptors.response.use(
+  // code = 200 放行
   response => {
     return response.data
   },
@@ -46,7 +47,8 @@ service.interceptors.response.use(
     } else {
       let code = 0
       try {
-        code = error.response.data.status
+        code = error.response.status
+        console.log(code)
       } catch (e) {
         if (error.toString().indexOf('Error: timeout') !== -1) {
           Notification.error({
@@ -56,9 +58,12 @@ service.interceptors.response.use(
           return Promise.reject(error)
         }
       }
-      console.log(code)
       if (code) {
         if (code === 401) {
+          Notification.info({
+            title: error.response.data.message,
+            duration: 5000,
+          })
           store.dispatch('LogOut').then(() => {
             // 用户登录界面提示
             Cookies.set('point', 401)

@@ -1,17 +1,14 @@
 <template>
     <div class="app-container">
-        <side-preview></side-preview>
-        <graph-editor></graph-editor>
+        <flow-panel></flow-panel>
     </div>
 </template>
 
 <script>
-import SidePreview from '@/components/SidePreview'
-import GraphEditor from '@/components/GraphEditor'
+import FlowPanel from '@/components/Flow/panel'
 export default({
     components: {
-        SidePreview,
-        GraphEditor,
+        FlowPanel,
     }
 })
 </script>

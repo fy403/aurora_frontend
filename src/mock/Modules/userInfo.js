@@ -2,10 +2,10 @@ const Mock = require('mockjs')
 
 const userInfoData = Mock.mock({
     'data': {
-        authorities: [{
-            authority: 'admin'
-        }],
-        dataScopes: [],
+        code: 200,
+        message: '',
+        data:  {
+             dataScopes: [],
         roles: ['admin'],
         user: {
             dept: {
@@ -16,6 +16,7 @@ const userInfoData = Mock.mock({
             gender: '男',
             nickName: '管理员',
             username: 'admin'
+            }
         }
     }
 })

@@ -31,10 +31,14 @@ const user = {
       const rememberMe = userInfo.rememberMe
       return new Promise((resolve, reject) => {
         login(userInfo.username, userInfo.password).then(res => {
+          if(res.message != '') {
+            reject(res.message)
+            return
+          }
           console.log("login: ", res)
-          setToken(res.token, rememberMe)
-          commit('SET_TOKEN', res.token)
-          setUserInfo(res.user, commit)
+          setToken(res.data.token, rememberMe)
+          commit('SET_TOKEN', res.data.token)
+          setUserInfo(res.data.user, commit)
           // 第一次加载菜单时用到， 具体见 src 目录下的 permission.js
           commit('SET_LOAD_MENUS', true)
           resolve()
@@ -48,8 +52,12 @@ const user = {
     GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(res => {
-          setUserInfo(res, commit)
-          resolve(res)
+          if(res.message != '') {
+            reject(res.message)
+            return
+          }
+          setUserInfo(res.data, commit)
+          resolve(res.data)
         }).catch(error => {
           reject(error)
         })
@@ -59,6 +67,10 @@ const user = {
     LogOut({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(res => {
+          if(res.message != '') {
+            reject(res.message)
+            return
+          }
           logOut(commit)
           resolve()
         }).catch(error => {

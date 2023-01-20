@@ -32,22 +32,22 @@ module.exports = {
     },
     // 仅在开发环境有效
     // proxy: {
-    //   '/api': {
-    //     target: process.env.VUE_APP_BASE_API,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/api': '/api'
-    //     },
-    //     ws: false,
-    //   },
-    //   '/auth': {
-    //     target: process.env.VUE_APP_BASE_API,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/auth': '/auth'
-    //     },
-    //     ws: false,
-    //   }
+      // '/api': {
+      //   target: process.env.VUE_APP_BASE_API,
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': '/api'
+      //   },
+      //   ws: false,
+      // },
+      // '/auth': {
+      //   target: process.env.VUE_APP_BASE_API,
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/auth': '/auth'
+      //   },
+      //   ws: false,
+      // }
     // }
   },
   configureWebpack: {

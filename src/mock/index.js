@@ -3,7 +3,8 @@ import Mock from 'mockjs'
 // 引入模板函数类
 import loginApi from './Modules/login'
 import userInfoApi from './Modules/userInfo'
-
+import workerInfoAPi from './Modules/workerInfo'
+import taskApi from './Modules/task'
 // Mock函数
 const { mock } = Mock
 
@@ -16,3 +17,7 @@ Mock.setup({
 mock(/\/auth\/login/, 'post', loginApi.login)
 mock(/\/auth\/info/, 'get', userInfoApi.userInfo)
 mock(/\/auth\/logout/, 'delete', loginApi.logout)
+mock(/\/api\/worker\/list/, 'get', workerInfoAPi.workerInfo)
+mock(/\/api\/task\/send/, 'post', taskApi.taskSend)
+mock(/\/api\/task\/touch/, 'post', taskApi.taskTouch)
+
