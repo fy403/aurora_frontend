@@ -22,8 +22,8 @@
             <ul v-show="handler_open" class="ef-node-menu-ul">
                 <div v-if="currWorkerIdx<=workerList.length-1&&currWorkerIdx>=0">
                     <draggable @end="end" @start="move" v-model="workerList[currWorkerIdx].handlers" :options="draggableOptions">
-                            <li v-for="handler in workerList[currWorkerIdx].handlers" :key="handler.name" class="ef-node-menu-li" :type="handler.name">
-                                <i class='el-icon-odometer'></i> {{handler.name}}
+                            <li v-for="handler in workerList[currWorkerIdx].handlers" :key="handler.name" :class="handler.name.includes('driver')? 'node-menu-li-driver':'node-menu-li'" style="width: 170px;margin-bottom: 10px;" :type="handler.name">
+                                <i class='el-icon-odometer' style="width: max-content;"></i>{{handler.name}}
                             </li>
                     </draggable>
                 </div>
@@ -46,12 +46,29 @@
 }
 .node-menu-li{
     color: #565758;
-    width: 150px;
+    width: 170px;
     /* border: 1px dashed #E0E3E7; */
     margin: 5px 0 5px 0;
     padding: 5px;
     border-radius: 5px;
     padding-left: 8px;
+}
+.node-menu-li-driver{
+    color: #565758;
+    width: 170px;
+    /* border: 1px dashed #E0E3E7; */
+    margin: 5px 0 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    padding-left: 8px;
+}
+.node-menu-li-driver:hover{
+    /* 设置移动样式*/
+    cursor: move;
+    background-color: #F0F7FF;
+    border: 1px solid #ff1824;
+    border-left: 5px solid #ff1824;
+    padding-left: 5px;
 }
 
 </style>

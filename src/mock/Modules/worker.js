@@ -130,11 +130,26 @@ const workerInfoData = Mock.mock({
     }
 })
 
+
+const workerEditHandlerData = Mock.mock({
+    'data' : {
+        code: 200,
+        message: '',
+        data: '',
+    }
+})
+
 function workerInfo(res) {
     // res是一个请求对象，包含: url, type, body
     return workerInfoData.data
 }
 
+function workerEditHandler(res) {
+    // res是一个请求对象，包含: url, type, body
+    return workerEditHandlerData.data
+}
+
 export default {
-    workerInfo
+    workerInfo,
+    workerEditHandler,
 }

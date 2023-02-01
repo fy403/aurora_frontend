@@ -7,7 +7,7 @@
             :class="nodeContainerClass"
     >
         <!-- 最左侧的那条竖线 -->
-        <div class="ef-node-left"></div>
+        <div :class="node.name.includes('driver')?'node-left':'ef-node-left'" ></div>
         <!-- 节点类型的图标 -->
         <div class="ef-node-left-ico flow-node-drag">
             <i :class="nodeIcoClass"></i>
@@ -25,7 +25,13 @@
         </div>
     </div>
 </template>
-
+<style>
+.node-left {
+    width: 4px;
+    background-color:#ff1824;
+    border-radius: 4px 0 0 4px;
+}
+</style>
 <script>
     export default {
         props: {

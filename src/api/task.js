@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export function send(centerRequest) {
-  console.log("send")
   return request({
     url: 'api/task/send',
     method: 'post',
@@ -10,7 +9,6 @@ export function send(centerRequest) {
 }
 
 export function touch(centerRequest) {
-  console.log("touch")
   return request({
     url: 'api/task/touch',
     method: 'post',
@@ -20,7 +18,6 @@ export function touch(centerRequest) {
 
 
 export function workerInfo() {
-  console.log("workerInfo")
   return request({
     url: 'api/worker/list',
     method: 'get',

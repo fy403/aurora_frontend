@@ -72,10 +72,32 @@ export const asyncRouterMap =
           meta: {
             icon: 'source',
             noCache: true,
-            title: '图'
+            title: '图模型'
           },
           name: 'graph',
           path: 'graph'
+        },
+        {
+          component: (resolve) => require(['@/views/tasks/worker'], resolve),
+          hidden: false,
+          meta: {
+            icon: 'source',
+            noCache: true,
+            title: 'worker实例'
+          },
+          name: 'worker',
+          path: 'worker'
+        },
+        {
+          component: (resolve) => require(['@/views/tasks/faas'], resolve),
+          hidden: false,
+          meta: {
+            icon: 'source',
+            noCache: true,
+            title: 'Faas'
+          },
+          name: 'faas',
+          path: 'faas'
         },
       ],
     },
