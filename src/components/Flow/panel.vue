@@ -24,6 +24,7 @@
                         <label for="upload" class="upload_file">导入</label>
                         <input type="file" style="display: none;" id="upload" @change="taskImport"/>
                         <el-button type="primary" @click="taskExport">导出</el-button>
+                        <el-button type="primary" @click="formatExport">格式导出</el-button>
                         <el-button type="primary" :disabled="centerResponse==null?true:false" @click="taskTouch(null)">查询任务</el-button>
                         <el-button type="primary" :loading="send_abort" @click="taskSend">提交任务</el-button>
                         <!-- <el-button type="primary" @click="taskTouch">查询任务</el-button> -->
@@ -55,18 +56,23 @@
                 <div style="position:absolute;top: 2000px;left: 2000px;">&nbsp;</div>
             </div>
             <!-- 右侧表单 -->
-            <div v-show="activeElement.nodeId != undefined" style="width: 300px;border-left: 1px solid #dce3e8;background-color: #FBFBFB">
+            <div v-show="activeElement.type != undefined" style="width: 300px;border-left: 1px solid #dce3e8;background-color: #FBFBFB">
                 <flow-node-form ref="nodeForm" @setLineLabel="setLineLabel" @repaintEverything="repaintEverything"></flow-node-form>
             </div>
         </div>
         <!-- 流程数据详情 -->
         <flow-info v-if="flowInfoVisible" ref="flowInfo" :data="data"></flow-info>
         <flow-help v-if="flowHelpVisible" ref="flowHelp"></flow-help>
+
+        <el-dialog title="格式导出" :visible.sync="dialogTableVisible">
+            <code-editor width="100%" height="500px" :copy_code="true" :read_only="true" v-model="codeContent" :languages="[['json', 'Json']]"></code-editor>
+        </el-dialog>
     </div>
 
 </template>
 
 <script>
+    import CodeEditor from 'simple-code-editor';
     import draggable from 'vuedraggable'
     // import { jsPlumb } from 'jsplumb'
     // 使用修改后的jsplumb
@@ -115,12 +121,15 @@
                 // 任务数据
                 centerResponse: null,
                 interval: 2000,
+                // codeEditor
+                dialogTableVisible: false,
+                codeContent: "",
             }
         },
         // 一些基础配置移动该文件中
         mixins: [easyFlowMixin],
         components: {
-            draggable, flowNode, nodeMenu, FlowInfo, FlowNodeForm, FlowHelp
+            draggable, flowNode, nodeMenu, FlowInfo, FlowNodeForm, FlowHelp, CodeEditor,
         },
         directives: {
             'flowDrag': {
@@ -168,6 +177,10 @@
             })
         },
         methods: {
+            formatExport(){
+                this.codeContent = JSON.stringify(this.generateTaskRequest(), null, 2);
+                this.dialogTableVisible = true
+            },
             generateTaskRequest(){
                 console.log("data: ", this.data)
                 var signatures = []
@@ -192,6 +205,14 @@
                                 splitValue = arg.value.split(',')
                                 type = arg.type.split('[]')[1]
                             }else{
+                                if (arg.value==null || arg.value.length==0){
+                                    Notification.error({
+                                        title: node.name+"的参数值不能为空",
+                                        duration: 5000,
+                                    })
+                                    error = new Error('错误')
+                                    return
+                                }
                                 if(arg.value.indexOf(',') != -1) {
                                     Notification.error({
                                         title: node.name+"的参数不是数组",
@@ -334,6 +355,10 @@
                     this.$message.error(error)
                     this.send_abort = false
                 })
+                this.$message({
+                    message: '发送成功',
+                    type: 'success',
+                })
             },
             taskTouch(centerResponse){
                 if (centerResponse == null) {
@@ -400,7 +425,14 @@
                         switch (response.state) {
                             case 'SUCCESS':
                                 newState = 'success';
-                                this.data.nodeList[idx].results = response.results
+                                let results = response.results;
+                                if (this.data.nodeList[idx].name.indexOf('driver')!=-1) {
+                                    let Base64 = require('js-base64').Base64;
+                                    results.forEach((item, idx)=>{
+                                        results[idx] = Base64.decode(item)
+                                    })
+                                }
+                                this.data.nodeList[idx].results = results 
                                 break;
                             case 'PENDING':
                             case "RETRY": 
@@ -426,7 +458,10 @@
             otherClick(event){
                 console.log(event)
                 if (event.target.className == 'container'){
+                    this.activeElement.type = undefined
                     this.activeElement.nodeId = undefined   
+                    this.activeElement.sourceId = undefined
+                    this.activeElement.targetId = undefined
                 }
             },
             // 返回唯一标识
@@ -449,7 +484,7 @@
                         this.$refs.nodeForm.lineInit({
                             from: conn.sourceId,
                             to: conn.targetId,
-                            label: conn.getLabel()
+                            label: conn.getLabel(),
                         })
                     })
                     // 连线

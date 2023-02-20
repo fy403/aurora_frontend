@@ -68,7 +68,7 @@
                         <el-input v-model="line.label"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button icon="el-icon-close">重置</el-button>
+                        <!-- <el-button icon="el-icon-close">重置</el-button> -->
                         <el-button type="primary" icon="el-icon-check" @click="saveLine">保存</el-button>
                     </el-form-item>
                 </el-form>
@@ -143,6 +143,10 @@
                         node.labelSelector = this.node.labelSelector,
                         this.$emit('repaintEverything')
                     }
+                })
+                this.$message({
+                    message: '保存成功',
+                    type: 'success',
                 })
             }
         }

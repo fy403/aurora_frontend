@@ -5,14 +5,16 @@
             <span class="ef-node-pmenu" @click="worker_open = !worker_open"><i :class="{'el-icon-caret-bottom': worker_open,'el-icon-caret-right': !worker_open}"></i>&nbsp;Workers</span>
             <ul v-show="worker_open" class="node-menu-ul">
                 <li v-for="(worker, idx) of workerList" class="node-menu-li" :key="worker.name" :type="worker.name">
-                    <div style="font-size:10px;" @click="changeWorkerIdx(idx)">实例编号: {{worker.name}}</div> 
+                    <span @click="changeWorkerIdx(idx)">
+                        <div style="font-size:10px;margin-top: 10px;" >实例编号: {{worker.name}}</div> 
+                        <div style="font-size:10px;margin-top: 10px;" >订阅队列: {{worker.spec_queue}}</div> 
                     <div class="el-container" style="font-size:10px;align-items: center;margin-top: 10px;" >
                        标签
                         <div v-for="(val,key,idx) in worker.labels" :key="idx" style="margin-right: 5px;">
                             <el-tag type="error">{{ key }} : {{ val }}</el-tag>
                         </div>
                     </div>
-                    
+                    </span>
                 </li>
             </ul>
         </div>
@@ -129,7 +131,8 @@
                 console.log('GetWorkerInfo ', res)
                 res.map(worker => {
                     this.workerList.push({
-                        name: worker.spec_queue,
+                        name: worker.uuid,
+                        spec_queue: worker.spec_queue,
                         labels: worker.labels,
                         handlers: worker.handlers,
                     })

@@ -77,17 +77,17 @@ export const asyncRouterMap =
           name: 'graph',
           path: 'graph'
         },
-        {
-          component: (resolve) => require(['@/views/tasks/worker'], resolve),
-          hidden: false,
-          meta: {
-            icon: 'source',
-            noCache: true,
-            title: 'worker实例'
-          },
-          name: 'worker',
-          path: 'worker'
-        },
+        // {
+        //   component: (resolve) => require(['@/views/tasks/config'], resolve),
+        //   hidden: false,
+        //   meta: {
+        //     icon: 'source',
+        //     noCache: true,
+        //     title: '线上配置'
+        //   },
+        //   name: 'config',
+        //   path: 'config'
+        // },
         {
           component: (resolve) => require(['@/views/tasks/faas'], resolve),
           hidden: false,

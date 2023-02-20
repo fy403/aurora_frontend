@@ -9,7 +9,7 @@ function resolve(dir) {
 
 const name = defaultSettings.title // 网址标题
 const host = 'localhost'
-const port = 14332 // 端口配置
+const port = 14332 // 前端部署端口配置
 
 // All configuration
 //  item explanations can be find in https://cli.vuejs.org/config/

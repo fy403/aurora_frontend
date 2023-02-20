@@ -70,7 +70,6 @@
 
 <script>
 import Selector from '@/components/Selector';
-
 export default {
     components: {
         Selector,

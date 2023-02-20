@@ -8,8 +8,7 @@
     "pro": "cross-env NODE_ENV=production dotenv -e .env.prod.serve vue-cli-service serve",
     "build:dev": "cross-env NODE_ENV=development dotenv -e .env.dev.serve vue-cli-service build",
     "build:pro": "cross-env NODE_ENV=production dotenv -e .env.prod.serve vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "mock": "cd mock && ts-node-dev mock.ts"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "^0.4.0",
